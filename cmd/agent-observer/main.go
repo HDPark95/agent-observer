@@ -15,13 +15,11 @@ import (
 	"agent-observer/internal/adapters/mailboxview"
 	"agent-observer/internal/bootstrap"
 	"agent-observer/internal/delivery"
-	"agent-observer/internal/hooks"
 	"agent-observer/internal/httpapi"
 	"agent-observer/internal/messagecli"
 	"agent-observer/internal/messaging"
 	"agent-observer/internal/model"
 	"agent-observer/internal/sessions"
-	sourceadapter "agent-observer/internal/sources"
 	"agent-observer/internal/userconfig"
 	"agent-observer/internal/workers"
 )
@@ -35,6 +33,8 @@ func main()                         { os.Exit(run()) }
 func run() int {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
+		case "hook":
+			return hookCommand(os.Args[2:], os.Stdin, os.Stdout, os.Stderr)
 		case "mcp":
 			return mcpCommand(os.Args[2:])
 		case "init", "doctor", "version", "--version":
@@ -55,17 +55,15 @@ func run() int {
 	port := flags.Int("port", userconfig.DefaultPort, "loopback port (1024–65535)")
 	root := flags.String("catalog-root", "", "optional metadata-only recent-session catalog")
 	provider := flags.String("source-provider", "codex", "codex or claude-code")
-	hookOutput := flags.String("hook-output", "", "absolute Claude hook metadata JSONL path")
 	exportConfig := flags.String("export-config", "", "explicit metadata export configuration JSON")
 	messageStore := flags.String("message-store", "", "opt-in absolute private directory for local message bodies")
 	mailboxStore := flags.String("mailbox-store", "", "opt-in absolute private directory for agent message delivery")
 	workersConfig := flags.String("workers-config", "", "explicit Observer-managed team configuration")
 	flags.Var(&sources, "source", "explicit root transcript; repeatable")
 	flags.Var(&children, "agent-source", "explicit child transcript; repeatable")
-	hook := len(os.Args) > 1 && os.Args[1] == "hook"
 	args := os.Args[1:]
 	demo := len(args) > 0 && args[0] == "demo"
-	if hook || demo {
+	if demo {
 		args = args[1:]
 	}
 	if err := flags.Parse(args); err != nil {
@@ -89,7 +87,7 @@ func run() int {
 			fmt.Fprintln(os.Stderr, "demo accepts only --port; real sources and integrations remain disabled")
 			return 2
 		}
-	} else if !(hook && *provider == "claude-code") {
+	} else {
 		cfg, err := userconfig.Load(*configPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -106,20 +104,9 @@ func run() int {
 		fmt.Fprintln(os.Stderr, "port must be between 1024 and 65535")
 		return 2
 	}
-	if hook && *provider == "claude-code" {
-		if err := sourceadapter.CaptureClaudeHook(os.Stdin, *hookOutput); err != nil {
-			fmt.Fprintln(os.Stderr, "cannot collect Claude hook metadata")
-			return 1
-		}
-		return 0
-	}
 	if *provider != "codex" && *provider != "claude-code" {
 		fmt.Fprintln(os.Stderr, "unknown source provider")
 		return 2
-	}
-	if hook {
-		hooks.Run(os.Stdin, os.Stdout, *port)
-		return 0
 	}
 	registry, err := sessions.NewWithStore(*root, *messageStore)
 	if err != nil {

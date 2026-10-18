@@ -10,6 +10,8 @@ THIRD_PARTY_NOTICES.md
 checks/__init__.py
 checks/initial_render.cjs
 checks/native_message_capture.py
+cmd/agent-observer/hook.go
+cmd/agent-observer/hook_test.go
 cmd/agent-observer/main.go
 cmd/agent-observer/mcp.go
 cmd/agent-observer/setup.go

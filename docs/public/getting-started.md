@@ -78,7 +78,13 @@ Initialization records this choice without enumerating the directory. At runtime
 
 A hook is optional; manual selection works without it. Register an **absolute executable path** to `agent-observer hook` in your Codex hook configuration for `SessionStart`, `UserPromptSubmit`, and, if desired, `PostToolUse` targeting supported `send_message` calls. Follow the current [Codex hook documentation](https://learn.chatgpt.com/docs/hooks) and review/trust the definition in Codex. Observer does not modify trust settings or install a hook automatically.
 
-The Go hook reads the same saved port as the server. For a custom configuration, include `--user-config /absolute/private/config.json` in both commands, or pass the same `--port`. The old Python hook helpers have been removed; replace any existing `python -m agent_observer...` hook command with the Go hook shown above. Hook completion is not evidence that a native message contained plaintext. Native encrypted bodies remain unavailable.
+The Go hook reads the same saved port as the server. For a custom configuration, include `--user-config /absolute/private/config.json` in both commands, or pass the same `--port`. Its options are `--user-config`, `--port`, `--source-provider`, and `--hook-output` (Claude metadata capture).
+
+Once the executable starts, handled option, configuration, and collection failures return exit code **0** with an advisory `systemMessage`. HTTP collection waits at most 800 ms. It never emits `decision: block` or `continue: false`; a stopped Observer must not prevent a conversation. This does not guarantee recovery from a missing executable, OS termination, or a host-level hook timeout. Keep the executable at the registered path and remove the optional hook when uninstalling.
+
+**Upgrading from Python:** remove every old Observer hook definition, including commands using `session_hook.py`, `message_hook.py`, or `python -m agent_observer...`, and replace it with the Go command. Check both user and project hook configurations: matching definitions run together, so adding a new one does not replace a stale one. A missing Python script exits **2**, which Codex interprets as a prompt rejection for `UserPromptSubmit`. Review and trust changed definitions in `/hooks`; Observer never changes trust settings. Check a fresh session after migrating. The Codex plugin itself installs no hooks.
+
+Automatic registration offers session metadata in the list; opening that session selects its transcript for the graph. Hook completion is not evidence that a native message contained plaintext. Native encrypted bodies remain unavailable.
 
 ## Diagnose and stop
 

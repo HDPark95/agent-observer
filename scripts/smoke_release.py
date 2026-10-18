@@ -51,6 +51,29 @@ def stop(process):
         raise RuntimeError('candidate failed graceful shutdown')
 
 
+def check_advisory_hook(binary, config, payload):
+    """Test process exit status, including errors before the collector starts."""
+    malformed = config.parent / 'malformed.json'
+    malformed.write_text('{private-config-content')
+    malformed.chmod(0o600)
+    cases = [
+        ['--user-config', str(config)],  # Server has stopped.
+        ['--user-config', str(config.parent / 'missing.json')],
+        ['--user-config', str(malformed)],
+        ['--private-option=secret', '--user-config', str(malformed)],
+        ['--user-config', str(config), '--port', '0'],
+        ['--source-provider', 'unknown'],
+    ]
+    for args in cases:
+        result = run(binary, 'hook', *args, input=json.dumps(payload))
+        assert result.returncode == 0, 'observation hook blocked the prompt'
+        warning = json.loads(result.stdout)
+        assert set(warning) == {'systemMessage'} and warning['systemMessage'], 'unexpected hook control output'
+        assert not result.stderr, 'hook exposed setup diagnostics'
+        assert 'secret' not in result.stdout and 'private-config-content' not in result.stdout
+    assert run(binary, '--user-config', str(malformed)).returncode == 2, 'invalid server config was accepted'
+
+
 def smoke(binary):
     with tempfile.TemporaryDirectory(prefix='observer-smoke-') as temporary:
         root = Path(temporary)
@@ -87,6 +110,7 @@ def smoke(binary):
                 assert all(('beta' if name=='alpha' else 'alpha')+'-tool' not in n['id'] for n in state['nodes'])
         finally:
             stop(process)
+        check_advisory_hook(binary, config, payload)
         demo_port = free_port()
         demo = subprocess.Popen([str(binary), 'demo', '--port', str(demo_port)], cwd=temporary, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         try:
@@ -96,7 +120,7 @@ def smoke(binary):
                 assert b'syntheticSnapshot' in response.read(), 'embedded sample missing'
         finally:
             stop(demo)
-    print('PASS: isolated init/version/doctor, occupied port, shared-port hook, two-session isolation, demo and shutdown')
+    print('PASS: isolated init/version/doctor, occupied port, shared-port hook, advisory hook failures, two-session isolation, demo and shutdown')
 
 
 def first_install(binary):

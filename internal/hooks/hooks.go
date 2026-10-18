@@ -61,5 +61,10 @@ func Run(in io.Reader, out io.Writer, port int) {
 			return
 		}
 	}
-	json.NewEncoder(out).Encode(model.Record{"systemMessage": "Observer 자동 수집을 완료하지 못했습니다. 원래 작업은 재실행하지 않습니다."})
+	Warn(out)
+}
+
+// Warn reports unavailable observation without rejecting or replaying the user's work.
+func Warn(out io.Writer) {
+	_ = json.NewEncoder(out).Encode(model.Record{"systemMessage": "Observer 자동 수집을 완료하지 못했습니다. 대화는 계속됩니다. Observer 설정과 실행 상태를 확인해 주세요."})
 }

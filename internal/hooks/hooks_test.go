@@ -1,11 +1,77 @@
 package hooks
 
 import (
+	"bytes"
+	"encoding/json"
+	"net"
+	"net/http"
+	"net/http/httptest"
+	"strconv"
 	"strings"
+	"sync/atomic"
 	"testing"
+	"time"
 
 	"agent-observer/internal/model"
 )
+
+func TestDeliveryFailuresRemainAdvisory(t *testing.T) {
+	var redirected atomic.Int32
+	target := httptest.NewServer(http.HandlerFunc(func(http.ResponseWriter, *http.Request) { redirected.Add(1) }))
+	defer target.Close()
+	for _, mode := range []string{"success", "unavailable", "redirect", "timeout", "offline"} {
+		t.Run(mode, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				var body map[string]any
+				if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+					t.Error(err)
+				}
+				if r.URL.Path != "/api/sessions" || len(body) != 3 || body["metadataOnly"] != true || body["sessionId"] != "selected" {
+					t.Errorf("unexpected registration payload: %v", body)
+				}
+				switch mode {
+				case "unavailable":
+					w.WriteHeader(http.StatusServiceUnavailable)
+				case "redirect":
+					http.Redirect(w, r, target.URL, http.StatusTemporaryRedirect)
+				case "timeout":
+					<-r.Context().Done()
+				}
+			}))
+			defer server.Close()
+			_, portString, err := net.SplitHostPort(server.Listener.Addr().String())
+			if err != nil {
+				t.Fatal(err)
+			}
+			port, err := strconv.Atoi(portString)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if mode == "offline" {
+				server.Close()
+			}
+			var out bytes.Buffer
+			start := time.Now()
+			Run(strings.NewReader(`{"hook_event_name":"UserPromptSubmit","session_id":"selected","transcript_path":"/selected.jsonl","prompt":"never forward"}`), &out, port)
+			if elapsed := time.Since(start); elapsed > 2*time.Second {
+				t.Fatalf("hook exceeded host timeout: %v", elapsed)
+			}
+			if mode == "success" {
+				if out.Len() != 0 {
+					t.Fatalf("successful hook output: %s", &out)
+				}
+				return
+			}
+			var result map[string]any
+			if err := json.Unmarshal(out.Bytes(), &result); err != nil || len(result) != 1 || result["systemMessage"] == nil {
+				t.Fatalf("expected advisory warning only: %s, %v", &out, err)
+			}
+		})
+	}
+	if redirected.Load() != 0 {
+		t.Fatal("hook followed a redirect with session metadata")
+	}
+}
 
 func TestOnlyApprovedFields(t *testing.T) {
 	route, p := Payload(model.Record{"hook_event_name": "UserPromptSubmit", "session_id": "s", "transcript_path": "/selected.jsonl", "prompt": "private"})
