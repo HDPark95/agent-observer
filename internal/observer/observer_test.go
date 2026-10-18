@@ -35,12 +35,12 @@ func canonical(v any) any {
 	json.Unmarshal(b, &result)
 	return clean(result)
 }
-func TestPythonContract(t *testing.T) {
+func TestRecordedEventContract(t *testing.T) {
 	var steps []struct {
 		Name, Target, Content, Mode string
 		Expected                    model.Record
 	}
-	raw, e := os.ReadFile("testdata/python_contract.json")
+	raw, e := os.ReadFile("testdata/event_contract.json")
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -49,8 +49,11 @@ func TestPythonContract(t *testing.T) {
 	}
 	dir := t.TempDir()
 	root, child := filepath.Join(dir, "root.jsonl"), filepath.Join(dir, "child.jsonl")
-	os.WriteFile(root, nil, 0600)
-	os.WriteFile(child, nil, 0600)
+	for _, path := range []string{root, child} {
+		if err := os.WriteFile(path, nil, 0600); err != nil {
+			t.Fatal(err)
+		}
+	}
 	o := New(root, []string{child})
 	for _, step := range steps {
 		t.Run(step.Name, func(t *testing.T) {
@@ -66,13 +69,19 @@ func TestPythonContract(t *testing.T) {
 			if e != nil {
 				t.Fatal(e)
 			}
-			f.WriteString(step.Content)
-			f.Close()
+			_, writeErr := f.WriteString(step.Content)
+			closeErr := f.Close()
+			if writeErr != nil {
+				t.Fatal(writeErr)
+			}
+			if closeErr != nil {
+				t.Fatal(closeErr)
+			}
 			actual, _, _ := o.Read()
 			if !reflect.DeepEqual(canonical(actual), canonical(step.Expected)) {
 				a, _ := json.MarshalIndent(canonical(actual), "", " ")
 				b, _ := json.MarshalIndent(canonical(step.Expected), "", " ")
-				t.Fatalf("Go:\n%s\nPython:\n%s", a, b)
+				t.Fatalf("actual:\n%s\nexpected:\n%s", a, b)
 			}
 			again, _, _ := o.Read()
 			if actual["revision"] != again["revision"] {

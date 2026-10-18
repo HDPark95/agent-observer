@@ -10,11 +10,11 @@ import (
 	"strings"
 	"time"
 
-	"agent-observer/agent_observer"
 	"agent-observer/internal/buildinfo"
 	"agent-observer/internal/messages"
 	"agent-observer/internal/model"
 	"agent-observer/internal/sessions"
+	"agent-observer/internal/webui"
 )
 
 func Handler(registry *sessions.Registry, port string) http.Handler {
@@ -78,7 +78,7 @@ func serveGet(w http.ResponseWriter, r *http.Request, registry *sessions.Registr
 		return
 	case "/":
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		_, _ = w.Write(assets.Index)
+		_, _ = w.Write(webui.Index)
 		return
 	case "/api/sessions":
 		result = registry.Listing()

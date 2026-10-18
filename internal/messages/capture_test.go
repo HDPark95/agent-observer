@@ -133,3 +133,52 @@ func TestAmbiguousHookCallDoesNotAttachBody(t *testing.T) {
 		}
 	}
 }
+
+func TestPendingBodiesJoinByCallAndRecipientRatherThanArrivalOrder(t *testing.T) {
+	f := &fake{turn: "turn"}
+	c := New(f)
+	for _, call := range []string{"second", "first", "wrong-recipient"} {
+		_, err := c.Publish(model.Record{"sessionId": "root-thread", "callId": call, "target": "dx", "body": "body-" + call}, true)
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+	f.nodes = []model.Record{
+		{"id": "a2a:/root/ux:first", "kind": "a2a", "sender": "/root/ux", "recipient": "/root/dx"},
+		{"id": "a2a:/root/ux:wrong-recipient", "kind": "a2a", "sender": "/root/ux", "recipient": "/root/other"},
+		{"id": "a2a:/root/ux:second", "kind": "a2a", "sender": "/root/ux", "recipient": "/root/dx"},
+	}
+	for i, node := range c.Read()["nodes"].([]model.Record) {
+		want := []string{"body-first", "", "body-second"}[i]
+		if got := node.String("body"); got != want {
+			t.Fatalf("node %s body = %q; want %q", node.String("id"), got, want)
+		}
+	}
+}
+
+func TestObservedBodyRedactionAndIdempotency(t *testing.T) {
+	node := model.Record{"id": "a2a:/root/ux:call", "kind": "a2a", "source": "ux", "target": "dx"}
+	c := New(&fake{turn: "turn", nodes: []model.Record{node}})
+	payload := model.Record{"eventId": node["id"], "turn": "turn", "source": "ux", "target": "dx", "body": "token=synthetic-value\nreview complete"}
+	if _, err := c.Publish(payload, false); err != nil {
+		t.Fatal(err)
+	}
+	before := c.Read()
+	body := before["nodes"].([]model.Record)[0].String("body")
+	if body != "token=[가림]\nreview complete" {
+		t.Fatalf("redacted body = %q", body)
+	}
+	if _, err := c.Publish(payload, false); err != nil {
+		t.Fatal(err)
+	}
+	if c.Read().String("revision") != before.String("revision") {
+		t.Fatal("duplicate changed revision")
+	}
+	payload["body"] = "conflict"
+	if _, err := c.Publish(payload, false); err == nil {
+		t.Fatal("conflicting body accepted")
+	}
+	if c.Read()["nodes"].([]model.Record)[0].String("body") != body {
+		t.Fatal("conflict overwrote first body")
+	}
+}

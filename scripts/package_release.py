@@ -80,7 +80,7 @@ def source_paths(root):
         normalized = name.casefold()
         if normalized.startswith('docs/') and not normalized.startswith('docs/public/'):
             raise ValueError('private document subtree: ' + name)
-        if normalized.startswith('internal/') and normalized.endswith('.json') and normalized != 'internal/observer/testdata/python_contract.json':
+        if normalized.startswith('internal/') and normalized.endswith('.json') and normalized != 'internal/observer/testdata/event_contract.json':
             raise ValueError('unreviewed fixture: ' + name)
         parts = normalized.split('/')
         if normalized == MANIFEST.casefold() or any(p in FORBIDDEN or p.startswith('.env') for p in parts) or normalized.endswith(PRIVATE_SUFFIXES):

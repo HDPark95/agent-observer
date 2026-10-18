@@ -78,7 +78,7 @@ Initialization records this choice without enumerating the directory. At runtime
 
 A hook is optional; manual selection works without it. Register an **absolute executable path** to `agent-observer hook` in your Codex hook configuration for `SessionStart`, `UserPromptSubmit`, and, if desired, `PostToolUse` targeting supported `send_message` calls. Follow the current [Codex hook documentation](https://learn.chatgpt.com/docs/hooks) and review/trust the definition in Codex. Observer does not modify trust settings or install a hook automatically.
 
-The Go hook reads the same saved port as the server. For a custom configuration, include `--user-config /absolute/private/config.json` in both commands, or pass the same `--port`. Legacy Python helpers predate this shared configuration; use the Go hook for new installations. Hook completion is not evidence that a native message contained plaintext. Native encrypted bodies remain unavailable.
+The Go hook reads the same saved port as the server. For a custom configuration, include `--user-config /absolute/private/config.json` in both commands, or pass the same `--port`. The old Python hook helpers have been removed; replace any existing `python -m agent_observer...` hook command with the Go hook shown above. Hook completion is not evidence that a native message contained plaintext. Native encrypted bodies remain unavailable.
 
 ## Diagnose and stop
 

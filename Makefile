@@ -8,7 +8,7 @@ plugin:
 
 STATICCHECK_VERSION := v0.7.0
 STATICCHECK := $(CURDIR)/bin/tools/staticcheck-$(STATICCHECK_VERSION)
-GO_SOURCES := $(shell find cmd internal agent_observer checks -type f -name '*.go')
+GO_SOURCES := $(shell find cmd internal checks -type f -name '*.go')
 
 build:
 	go build -trimpath -o bin/agent-observer ./cmd/agent-observer
