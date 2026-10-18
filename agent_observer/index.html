@@ -1,0 +1,561 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Observer — 실행 흐름</title><style>
+:root{color-scheme:light;--bg:#f3f4f6;--panel:#fff;--ink:#202124;--muted:#666b73;--line:#dde1e7;--blue:#087aff;--skill:#8057bd}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--bg);font:13px/1.5 -apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased;height:100dvh;display:flex;flex-direction:column}button{font:inherit;color:inherit;cursor:pointer}button:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}header{height:58px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--line);background:var(--panel)}.brand{font-size:16px;font-weight:650;letter-spacing:-.5px;display:flex;align-items:center;gap:12px}.mark{display:grid;place-items:center;width:26px;height:26px;background:#202124;color:white;border-radius:8px;font-size:18px}.brand span:last-child{color:var(--muted);font-size:12px;font-weight:400;letter-spacing:0;border-left:1px solid var(--line);padding-left:16px}.connection{display:flex;align-items:center;gap:16px}#status{font-size:11px;font-weight:500;display:flex;align-items:center;gap:7px}#status:before{content:'';width:6px;height:6px;border-radius:50%;background:#2c9b57}#status[data-state="offline"]:before{background:#cb4848}#status[data-state="paused"]:before{background:#c28b2c}#heartbeat{color:var(--muted);font-size:10px}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:172px minmax(0,1fr) 282px}.sidebar{padding:26px 16px;border-right:1px solid var(--line);background:#fafafb;overflow:auto}.sidebar h2{font-size:11px;font-weight:500;color:var(--muted);margin:0 10px 12px}.session{padding:12px;background:#e9eef6;border-radius:9px;margin-bottom:30px}.session strong{font-size:12px}.session p{font-size:10px;margin:6px 0 0;color:var(--muted)}.legend{display:flex;align-items:center;gap:9px;padding:8px 10px;font-size:12px}.dot{width:7px;height:7px;border-radius:50%;background:#86909b}.dot.agent{background:var(--blue)}.dot.skill{background:var(--skill)}.sidebar-note{font-size:10px;color:var(--muted);margin:30px 10px;line-height:1.8}main{display:flex;flex-direction:column;min-width:0;min-height:0}.canvas-heading{padding:24px 28px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px}h1{font-size:23px;letter-spacing:-.8px;font-weight:600;margin:0}.subtitle{color:var(--muted);font-size:11px;margin:5px 0 0}.bar{display:flex;gap:4px;align-items:center;padding:0 28px 16px;flex-wrap:wrap}.bar button{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 10px;font-size:11px}.bar button[aria-pressed="true"]{background:#e8f2ff;color:#065bbe;border-color:#b9d6ff}.bar button:hover{border-color:#a4aab3}#counts{color:var(--muted);font-size:10px;margin-left:auto}#turn{font-size:10px;color:var(--muted);overflow-wrap:anywhere}#viewport{flex:1;min-height:0;overflow:auto;position:relative;border-top:1px solid var(--line);background-image:radial-gradient(#d9dde4 .7px,transparent .7px);background-size:20px 20px;scrollbar-color:#c7cbd2 transparent}#canvas{position:relative;min-height:100%;min-width:640px}#edges{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.edge{stroke:#ccd2dc;stroke-width:1.3;fill:none}.edge.skill{stroke:#b99bdc}.edge.active{stroke:var(--blue);stroke-width:2}.node{position:absolute;text-align:left;background:white;border:1px solid #dce0e7;border-radius:11px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 2px 4px #222a3405;overflow-wrap:anywhere}.node:hover{border-color:#9aa9bc}.node.selected{border-color:var(--blue);box-shadow:0 0 0 3px #087aff18,0 4px 12px #203e6808}.node-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:10px;gap:8px}.node-kind{display:flex;align-items:center;gap:6px}.node-kind:before{content:'';width:5px;height:5px;background:#8390a0;border-radius:50%}.node b{font-size:13px;font-weight:550;line-height:1.4;letter-spacing:-.15px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.node small{font-size:10px;color:var(--muted);margin-top:auto}.node.agent{background:#edf5ff;border-color:#bed7f6}.node.agent .node-kind:before{background:var(--blue)}.node.request{border-radius:18px;background:#f8f9fb}.node.skill{border-color:#dfd4ef}.node.skill .node-kind{color:var(--skill)}.node.skill .node-kind:before{background:var(--skill)}.node.message{background:#f3f4f6;border-color:transparent;box-shadow:none;border-left:2px solid #cbd0d8;border-radius:0}.node.message b{font-size:12px;font-weight:400}.node.message,.node.skill{padding:8px 12px;gap:4px}.node.message b,.node.skill b{-webkit-line-clamp:1}.node.internal{border-style:dashed;background:#f8f9fb}.node.error{border-color:#dc9696}.node.error small{color:#a53838}.node[hidden]{display:none}.node.new{animation:arrive .22s ease-out}@keyframes arrive{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}.canvas-footer{padding:10px 22px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);background:#fafafb;font-size:10px;color:var(--muted)}#latest{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inspector{padding:24px 22px;border-left:1px solid var(--line);background:#fff;overflow:auto;min-width:0}.inspector-caption{font-size:11px;color:var(--muted);margin:0 0 22px}#detail{overflow-wrap:anywhere}#detail h2{font-size:18px;letter-spacing:-.4px;line-height:1.4;margin:0 0 10px}#detail p{font-size:12px;color:var(--muted);line-height:1.8}dl{margin:24px 0}dt{font-size:10px;color:var(--muted);margin-top:18px}dd{font-size:12px;margin:5px 0 0;line-height:1.7}.evidence-note{border-top:1px solid var(--line);padding-top:18px;font-size:11px!important}details{border-top:1px solid var(--line);padding-top:16px;font-size:11px;color:var(--muted)}summary{cursor:pointer}details p{font-size:10px!important}#empty{position:absolute;top:110px;left:40px;max-width:360px;color:var(--muted)}#empty h2{font-size:20px;color:var(--ink);font-weight:500}#empty p{line-height:1.8;font-size:12px}@media(max-width:1200px){.workspace{grid-template-columns:minmax(0,1fr) 260px}.sidebar{display:none}}@media(max-width:760px){body{height:auto;min-height:100dvh}.workspace{display:flex;flex-direction:column}.inspector{border-left:0;border-top:1px solid var(--line);max-height:340px}#viewport{height:60vh;flex:none}.connection #heartbeat,.brand span:last-child{display:none}.canvas-heading{padding:20px}.bar{padding:0 20px 14px}#counts{width:100%;margin-top:5px}.canvas-footer{flex-wrap:wrap}.inspector-caption{margin-bottom:12px}}@media(prefers-reduced-motion:reduce){.node.new{animation:none}}
+.node.subagent{background:#edf5ff;border-color:#bed7f6}.node.subagent .node-kind:before{background:var(--blue)}.node.a2a{border-color:#b4d8d1;background:#f4fbf8}.message-edge{stroke:#168577;stroke-width:1.8;fill:none;stroke-dasharray:5 3}.message-label{fill:#126e63;font-size:10px;paint-order:stroke;stroke:var(--bg);stroke-width:4px}.node.a2a .node-kind:before{background:#168577}#auto-agents{font-size:10px;color:var(--muted)}.agent-group{position:absolute;background:#f9fbfe;border:1px solid #d4e0ee;border-radius:18px;z-index:0;padding:16px;color:var(--muted)}#edges{z-index:1}.node{z-index:2}.node[hidden]{display:none}.node.group-header{background:#eaf2ff;border-color:transparent;box-shadow:none}.message-link{position:absolute;z-index:3;border:1px solid #a5d3c8;background:#f0faf6;color:#146657;border-radius:12px;padding:7px 9px;font-size:10px;line-height:1.4;overflow-wrap:anywhere;box-shadow:0 2px 6px #143e2e0a}.message-link.selected{outline:2px solid var(--blue)}
+.group-work{font-size:11px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.group-header b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hierarchy-edge{stroke:#087aff;stroke-width:1.5;fill:none}.conversation-message{border:1px solid var(--line);border-radius:10px;padding:12px;margin:14px 0;background:#f8fafc}.conversation-meta{font-size:10px;color:var(--muted);margin-bottom:9px}.conversation-body{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8;color:var(--ink)}
+.session-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:0 28px 16px}.manual-connect{border:0;padding:0}.manual-connect form{display:flex;gap:6px;flex-wrap:wrap;padding-top:8px}.manual-connect input{padding:8px;border:1px solid var(--line);border-radius:7px;min-width:220px}.session-controls button,.manual-connect button{padding:8px;border:1px solid var(--line);border-radius:7px;background:white}#session-feedback{font-size:11px;color:var(--muted)}
+[hidden]{display:none!important}.overview{flex:1;overflow:auto;padding:40px clamp(24px,5vw,80px);background:#f6f7f9}.overview-top{max-width:1200px;margin:0 auto 28px;display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap}.overview h1{font-size:30px;letter-spacing:-1px}.overview p{color:var(--muted)}#session-search{padding:11px 14px;width:260px;border:1px solid var(--line);border-radius:12px;background:#fff;font:inherit}.session-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}.session-card{display:flex;flex-direction:column;gap:18px;min-height:184px;padding:24px;border:1px solid #e2e6ed;border-radius:18px;background:white;text-decoration:none;color:var(--ink);box-shadow:0 3px 14px #17253a04;transition:box-shadow .15s,border-color .15s}.session-card:hover,.session-card:focus-visible{border-color:#80b8fa;box-shadow:0 6px 24px #17253a10}.session-card strong{font-size:18px;letter-spacing:-.4px;line-height:1.5;overflow-wrap:anywhere}.session-card-top{align-items:flex-start;flex-direction:column}.session-card .badge{white-space:nowrap}.session-card-top,.session-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}.session-card-bottom{margin-top:auto;font-size:11px;color:var(--muted)}.session-card .badge{font-size:10px;background:#f1f4f8;padding:4px 8px;border-radius:20px;color:#5a6470}.session-card .badge.connected{background:#eaf4ff;color:#1766bc}.session-card time{font-size:12px;color:var(--muted)}#overview-empty{max-width:1200px;margin:40px auto;color:var(--muted)}
+.overview-actions{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}.manual-connect{max-width:480px;padding-top:10px}.manual-connect summary{font-size:12px;color:var(--muted)}#current-session-name{font-size:13px;font-weight:550;overflow-wrap:anywhere}#session-feedback:empty{display:none}
+.sample-notice{margin:0 0 16px;padding:12px 16px;border:1px solid #b9d4ed;border-radius:12px;background:#edf6ff;color:#254966;font-size:13px}.sample-notice[hidden]{display:none}#message-capabilities{font-size:12px;color:var(--muted);line-height:1.7;margin-top:22px}#connect-help{font-size:13px;max-width:340px;line-height:1.7}#sample-inspector{font-size:12px;color:#254966;background:#edf6ff;padding:10px;border-radius:8px}
+</style></head><body><header><div class="brand"><span class="mark" aria-hidden="true">⌁</span>Observer<span>Local agent workflows</span></div><div class="connection"><span id="heartbeat">이벤트 대기</span><strong id="status" role="status">연결 중</strong></div></header>
+<section id="overview" class="overview"><div class="overview-top"><div><h1>세션 모아보기</h1><p>최근 대화를 선택해 에이전트의 실행 흐름을 살펴보세요.</p><span id="session-total"></span></div><div class="overview-actions"><input id="session-search" type="search" aria-label="세션 검색" placeholder="대화 제목, 프로젝트, ID 검색"><button id="open-sample" type="button">샘플 살펴보기</button><details class="manual-connect"><summary>내 세션 연결하기</summary><p id="connect-help">관찰할 Codex 대화의 .jsonl 파일 경로를 입력하세요. macOS Finder에서 ⇧⌘G → ~/.codex/sessions로 이동한 뒤, 선택한 파일을 ⌥⌘C로 경로 복사해 붙여 넣으세요. CODEX_HOME을 설정했다면 그 경로 아래 sessions를 사용하세요. 원본 파일은 수정하지 않습니다.</p><form id="session-form"><input id="session-source" aria-describedby="connect-help" aria-label="대화 기록 파일 절대 경로" placeholder="/…/rollout-….jsonl" required><input id="session-label" aria-label="세션 이름" placeholder="세션 이름 (선택)" maxlength="100"><button type="submit">연결</button></form></details><span id="session-feedback" role="status"></span></div></div><div id="session-grid" class="session-grid"></div><p id="overview-empty" hidden>연결된 세션이 없습니다. 샘플로 화면을 살펴보거나 내 세션을 연결하세요.</p></section><div id="flow-view" class="workspace" hidden><nav class="sidebar" aria-label="실행 정보"><h2>현재 실행</h2><div class="session"><strong id="session-title">세션 선택</strong><p id="turn">턴 대기</p></div><h2>그래프 읽기</h2><div class="legend"><i class="dot agent"></i>에이전트</div><div class="legend"><i class="dot"></i>도구와 작업</div><div class="legend"><i class="dot skill"></i>읽은 스킬</div><p class="sidebar-note">에이전트별로 작업을 묶고,<br>각 그룹은 관측 순서입니다.<br><br>가지로 연결된 스킬은 해당 도구가 읽은 파일입니다.</p><details id="message-capabilities"><summary>메시지에서 확인할 수 있는 것</summary><p>기본 기록은 실행 흐름을 보여주지만 에이전트 간 메시지 본문은 제공되지 않을 수 있습니다. 암호화된 본문은 복원할 수 없습니다.</p><p>Observer 관리 메시지는 저장된 본문을 표시합니다. 본문 저장, 실행 요청 수락, 작업 완료는 각각 확인해야 합니다. 기본 서브에이전트가 자동 전환되는 것은 아닙니다.</p><p>스킬 파일 읽기는 읽었다는 근거이며 적용 성공이나 결과의 원인을 뜻하지 않습니다.</p></details></nav>
+<main><p id="sample-notice" class="sample-notice" hidden><strong>합성 샘플</strong> · 화면 설명용 가상 기록입니다. 실제 세션을 읽거나 모델을 호출하지 않습니다.</p><div class="canvas-heading"><div><h1 id="flow-heading" tabindex="-1">실행 흐름</h1><p class="subtitle">작업이 이어지는 순간을 따라가세요.</p></div></div><div class="session-controls"><button id="all-sessions">← 모든 세션</button><strong id="current-session-name" aria-label="현재 세션">세션 연결 중…</strong></div><div class="bar"><button id="pause">화면 갱신 멈춤</button><button id="follow" aria-pressed="true">자동 따라가기 · 켜짐</button><button id="internals" aria-expanded="false" aria-controls="canvas">내부 이벤트 펼치기 · 0</button><span id="auto-agents" title="현재 턴에서 관측한 자식 기록만 자동 연결합니다"></span><span id="counts">0 노드</span></div><section id="viewport" aria-label="실시간 실행 그래프"><div id="canvas"><svg id="edges" aria-hidden="true"></svg><div id="empty"><h2>다음 작업을 기다리고 있어요.</h2><p>이 대화에서 도구나 스킬을 사용하면 여기에 연결됩니다.</p></div></div></section><div class="canvas-footer"><span id="latest">기록을 연결하는 중입니다.</span><span>파란 실선: 요청·위임 / 초록 점선: 메시지 · UI virtual-1</span></div></main><aside class="inspector"><p class="inspector-caption">선택한 작업</p><p id="sample-inspector" hidden>합성 예시입니다. 아래 본문·상태는 실제 수집 근거가 아닙니다.</p><div id="detail"><h2>흐름을 살펴보세요.</h2><p>노드를 선택하면 작업과 연결 근거를 볼 수 있습니다.</p></div></aside></div><script>
+const canvas=document.querySelector('#canvas'),edges=document.querySelector('#edges'),detail=document.querySelector('#detail');
+let data={nodes:[]},selected=null,turn=null,revision=-1,paused=false,following=true,showInternal=false;const elements=new Map();
+const types={request:'요청',agent:'메인 에이전트',call:'호출 묶음',tool:'도구',skill:'스킬',message:'응답',subagent:'서브에이전트',a2a:'에이전트 간 메시지'};
+function nodeKindLabel(node){
+ if(node.managedWorker)return 'Observer 관리 작업자';
+ return Object.hasOwn(types,node.kind)?types[node.kind]:'기타 이벤트';
+}
+function agentName(id){
+ if(id==='agent')return '메인 에이전트';
+ const owner=indexFor().byId.get(id);
+ return displayText(owner?.agentPath?.replace(/^\/root\//,''),
+  displayText(owner?.label,displayText(id?.replace(/^subagent:\/root\//,''),'이름 미수집')));
+}
+function nodeOwner(node){
+ if(node.ownerAgent)return agentName(node.ownerAgent);
+ if(node.ownerLabel)return displayText(node.ownerLabel,'이름 미수집');
+ if(node.kind==='tool'||node.kind==='skill'){
+  const parent=indexFor().byId.get(node.parent);
+  if(parent?.kind==='subagent'||parent?.kind==='agent')return agentName(parent.id);
+  if(parent?.ownerAgent)return agentName(parent.ownerAgent);
+ }
+ return '';
+}
+function nodeCaption(node){
+ const kind=nodeKindLabel(node);
+ if(node.kind==='subagent')return kind+' · '+agentName(node.id);
+ const owner=nodeOwner(node);
+ return owner?kind+' · '+owner+' 소속':kind;
+}
+function nodeTitle(node){
+ if(node.kind==='subagent')return agentName(node.id);
+ if(node.kind==='a2a')return agentName(node.source)+' → '+agentName(node.target);
+ return displayText(node.label,nodeKindLabel(node));
+}
+const displayText=(value,fallback='미수집')=>value==null||['','undefined','null'].includes(String(value).trim())?fallback:String(value);
+const esc=x=>displayText(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const isInternal=n=>n.kind==='call'||n.label==='하네스 관측 문서 읽기'||['tools.observation_workflow','tools.skill_observation','tools.task_observation','tools.task_measurement'].includes(n.toolName);
+const visibleNodes=()=>data.nodes.filter(n=>showInternal||!isInternal(n));
+const clock=x=>x?new Date(x).toLocaleTimeString('ko-KR',{hour12:false}):'—';
+// Compare RFC3339 instants without losing sub-millisecond ordering. Invalid
+// timestamps sort first; a stable ID resolves ties independently of arrival.
+function instantNs(value){
+ if(typeof value!=='string')return null;
+ const m=/^(\d{4})-(\d{2})-(\d{2})[Tt](\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,9}))?([Zz]|[+-]\d{2}:\d{2})$/.exec(value);
+ if(!m)return null;
+ const [y,mo,day,h,mi,s]=m.slice(1,7).map(Number),leap=y%4===0&&(y%100!==0||y%400===0);
+ const days=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31];
+ if(mo<1||mo>12||day<1||day>days[mo-1]||h>23||mi>59||s>59)return null;
+ let offset=0;
+ if(!/^[Zz]$/.test(m[8])){
+  const oh=Number(m[8].slice(1,3)),om=Number(m[8].slice(4,6));
+  if(oh>23||om>59)return null;
+  offset=(oh*60+om)*(m[8][0]==='-'?-1:1);
+ }
+ const date=new Date(0);date.setUTCFullYear(y,mo-1,day);date.setUTCHours(h,mi,s,0);
+ return BigInt(date.getTime()-offset*60000)*1000000n+BigInt((m[7]||'').padEnd(9,'0'));
+}
+const nodeInstants=new WeakMap();
+function nodeInstant(node){
+ const cached=nodeInstants.get(node);
+ if(cached&&cached.at===node.at)return cached.instant;
+ const instant=instantNs(node.at);nodeInstants.set(node,{at:node.at,instant});return instant;
+}
+function compareChronological(a,b){
+ const x=nodeInstant(a),y=nodeInstant(b);
+ if(x===null&&y!==null)return -1;if(x!==null&&y===null)return 1;
+ if(x!==null&&y!==null&&x!==y)return x<y?-1:1;
+ const ai=String(a.id||''),bi=String(b.id||'');return ai<bi?-1:ai>bi?1:0;
+}
+function resultEvidence(message){
+ if(message.outputState==='complete')return '전체 결과 보관';
+ if(message.outputState==='truncated')return message.outputReason==='sanitized'?'일부 결과 보관 · 제어 문자 등 정리':'일부 결과 보관 · 길이 제한';
+ if(message.outputState==='omitted')return message.outputReason==='sanitized'?'결과 본문 생략 · 제어 문자 등 정리':'결과 본문 미수집';
+ return '결과 완전성 미수집 · 이전 기록';
+}
+function executionResult(message){
+ if(!message.result&&!message.outputState)return '';
+ return '<details><summary>수신 작업자의 실행 결과 · '+esc(resultEvidence(message))+'</summary><div class="conversation-body">'+(message.result?esc(message.result):message.outputState==='complete'?'(빈 결과)':'보관된 결과 본문이 없습니다.')+'</div></details>';
+}
+function inspect(){
+ const n=data.nodes.find(n=>n.id===selected);
+ if(!n){patchHTML(detail,'<h2>흐름을 살펴보세요.</h2><p>노드를 선택하면 작업과 연결 근거를 볼 수 있습니다.</p>');return;}
+ if(n.kind==='a2a'){inspectConversation(n);return;}
+ patchHTML(detail,`<h2>${esc(nodeTitle(n))}</h2><p>${esc(nodeCaption(n))} · ${esc(n.status)}</p><dl>${nodeOwner(n)?'<dt>소속 에이전트</dt><dd>'+esc(nodeOwner(n))+'</dd>':''}<dt>${n.kind==='a2a'?'메시지 방향':['agent','subagent'].includes(n.kind)?'에이전트 이름':'실제 도구'}</dt><dd>${esc(n.kind==='a2a'?nodeTitle(n):n.toolName||nodeTitle(n))}</dd><dt>관측 시각</dt><dd>${clock(n.at)}</dd>${n.updatedAt?'<dt>최근 상태 변경</dt><dd>'+clock(n.updatedAt)+'</dd>':''}<dt>연결 관계</dt><dd>${esc(data.nodes.find(x=>x.id===n.parent)?.label||'시작 요청')} → ${n.kind==='skill'?'스킬 파일 읽기':n.kind==='a2a'?'메시지 송신 호출':'실행 소속'}</dd><dt>수집 근거</dt><dd>${esc(n.evidence||'작업 시작·종료 기록')}</dd><dt>관측된 실행 시간</dt><dd>${n.startMs!=null&&n.endMs!=null?(n.endMs-n.startMs)+' ms':'미수집'}</dd><dt>종료 코드</dt><dd>${esc(n.exitCode)}</dd></dl><p class="evidence-note">${esc(n.scope||'완료 관측은 성공 판정이나 스킬 효과 판정과 다릅니다.')}</p><details><summary>기술 상세</summary><p>${esc(n.id)}</p></details>`);
+
+
+}
+function inspectConversation(node){
+ const messages=data.nodes.filter(x=>x.kind==='a2a'&&((x.source===node.source&&x.target===node.target)||(x.source===node.target&&x.target===node.source)))
+  .sort(compareChronological);
+ const available=messages.filter(x=>x.body!=null).length;
+ patchHTML(detail,'<h2>'+esc(agentName(node.source))+' ↔ '+esc(agentName(node.target))+'</h2><p>주고받은 메시지 '+messages.length+'건 · 시간순</p><p>본문 '+available+'건'+(available<messages.length?' · 본문 없음 '+(messages.length-available)+'건':'')+'</p>'+
+ messages.map(x=>'<article class="conversation-message"><div class="conversation-meta">'+esc(nodeTitle(x))+' · '+clock(x.at)+'</div><div class="conversation-body">'+esc(conversationBody(x))+'</div><p>'+esc(messageStatus(x))+'</p>'+executionResult(x)+'</article>').join('')+
+ '<p class="evidence-note">관리 작업자는 저장된 메시지로 자동 실행합니다. 턴 완료는 실행 종료이며 결과의 정확성 판정은 아닙니다. 메시지함의 수신 확인은 명시적인 Ack이고, 네이티브 호출 반환은 읽음 확인이 아닙니다. 알려진 인증정보 형식은 가립니다.</p>'+
+ '<details><summary>수집 근거</summary><p>'+esc(node.evidence)+'</p><p>'+esc(node.id)+'</p></details>');
+}
+function conversationBody(message){
+ if(message.body!=null)return message.body||'(빈 메시지)';
+ if(message.bodyUnavailable==='expired')return '수신 확인 후 보관 기간이 지나 본문이 삭제되었습니다.';
+ if(message.bodyUnavailable==='encrypted')return 'Codex가 이 메시지의 본문을 Observer에 제공하지 않았습니다. 송신자·수신자와 호출 상태만 확인할 수 있습니다.';
+ return '본문이 기록되지 않은 메시지입니다.';
+}
+function messageOrigin(message){
+ const origin={'synthetic':'합성 샘플 메시지','native-hook':'송신 훅 · 자동 수집','sender-local':'송신자 제공 · 로컬 수집','observer-mailbox':'Observer 메시지함','observer-managed':'Observer 자동 전달'}[message.bodySource];
+ if(origin)return origin;
+ return String(message.id||'').startsWith('a2a:')?'Codex 기본 메시지':'수집 경로 미확인';
+}
+function messageStatus(message){
+ const parts=[messageOrigin(message)];
+ if(message.body==null)parts.push(message.bodyUnavailable==='expired'?'본문 보관 만료':'본문 미제공');
+ parts.push(displayText(message.status,'상태 미수집'));
+ if(message.ackedAt)parts.push(clock(message.ackedAt));
+ return parts.join(' · ');
+}
+// Rebuilt once per snapshot; owner lookup never rebuilds the whole node map.
+let graphIndex=null,arrivalIds=new Set();
+function indexFor(nodes=data.nodes){
+ if(!graphIndex||graphIndex.nodes!==nodes||graphIndex.count!==nodes.length)
+  graphIndex={nodes,count:nodes.length,byId:new Map(nodes.map(n=>[n.id,n])),owners:new Map()};
+ return graphIndex;
+}
+function ownerId(node, allNodes=data.nodes){
+ const index=indexFor(allNodes),visited=new Set(),chain=[];
+ let current=node,owner='unassigned';
+ while(current&&!visited.has(current.id)){
+  if(index.owners.has(current.id)){owner=index.owners.get(current.id);break;}
+  visited.add(current.id);chain.push(current.id);
+  if(['agent','subagent'].includes(current.kind)){owner=current.id;break;}
+  current=index.byId.get(current.ownerAgent||current.parent);
+ }
+ for(const id of chain)index.owners.set(id,owner);
+ return owner;
+}
+// Avoid replacing DOM subtrees or rewriting geometry when the output is unchanged.
+function patchHTML(el,html){if(el._html!==html){el.innerHTML=html;el._html=html;}}
+function patchStyle(el,css){if(el._css!==css){el.style.cssText=css;el._css=css;}}
+function patchText(el,text){if(el.textContent!==text)el.textContent=text;}
+function patchAttribute(el,key,value){
+ const attributes=el._attributes||(el._attributes=new Map());
+ if(attributes.get(key)!==value){el.setAttribute(key,value);attributes.set(key,value);}
+}
+function patchClass(el,key,value){
+ const classes=el._classes||(el._classes=new Map());
+ if(classes.get(key)!==value){el.classList.toggle(key,value);classes.set(key,value);}
+}
+function syncCards(pos){
+ pruneElements(elements,new Set(pos.keys()));
+ for(const id of pos.keys()){
+  const n=indexFor().byId.get(id);let el=elements.get(id);
+  if(el&&el.dataset.kind!==n.kind){el.remove();elements.delete(id);el=null;}
+  if(!el){
+   el=document.createElement('button');el.className='node '+(arrivalIds.has(id)?'new ':'')+n.kind;el.dataset.id=id;el.dataset.kind=n.kind;
+   el.onclick=()=>{setFollowing(false);selected=id;inspect();layout();};elements.set(id,el);canvas.append(el);
+  }
+  patchClass(el,'internal',isInternal(n));patchClass(el,'error',Boolean(n.exitCode)||['오류','failed'].includes(n.status));
+  if(['agent','subagent'].includes(n.kind))continue;
+  const caption=nodeCaption(n),title=nodeTitle(n);
+  const signature=JSON.stringify([n.kind,caption,title,n.at,n.status]);
+  if(el._cardSignature!==signature){
+   patchHTML(el,`<span class="node-top"><span class="node-kind">${isInternal(n)?'내부 · ':''}${esc(caption)}</span><time>${clock(n.at)}</time></span><b title="${esc(title)}">${esc(title)}</b><small>${esc(n.status)}</small>`);
+   el._cardSignature=signature;
+  }
+ }
+ arrivalIds.clear();
+}
+function messagePairs(nodes){
+ const pairs=new Map();
+ for(const n of nodes.filter(n=>n.kind==='a2a')){
+  const key=JSON.stringify([n.source,n.target]);
+  const pair=pairs.get(key)||{source:n.source,target:n.target,messages:[]};
+  pair.messages.push(n);pairs.set(key,pair);
+ }
+ return [...pairs.values()];
+}
+function positionsFor(nodes){
+ const pos=new Map(),groups=new Map();
+ const agents=nodes.filter(n=>['agent','subagent'].includes(n.kind));
+ // Put the coordinator before its delegated agents.
+ agents.sort((a,b)=>(b.kind==='agent')-(a.kind==='agent'));
+ for(const n of agents)groups.set(n.id,{id:n.id,label:agentName(n.id),header:n,members:[]});
+ for(const n of nodes.filter(n=>!['request','agent','subagent','a2a'].includes(n.kind))){
+  const id=ownerId(n,data.nodes);
+  if(!groups.has(id))groups.set(id,{id,label:'소속 미확인',members:[]});
+  groups.get(id).members.push(n);
+ }
+ const width=Math.max(640,canvas.clientWidth),columns=width>=1080?2:1;
+ const groupWidth=columns===2?Math.floor((width-440)/2):width-240;
+ let rowY=28,rowHeight=0,index=0;
+ // User requests start the flow; they do not belong to an executing agent.
+ for(const request of nodes.filter(n=>n.kind==='request')){
+  pos.set(request.id,{x:24,y:rowY,w:groupWidth,h:116});rowY+=148;
+ }
+ for(const g of groups.values()){
+  const column=index%columns;
+  if(index&&column===0){rowY+=rowHeight+48;rowHeight=0;}
+  g.x=24+column*(groupWidth+200);g.y=rowY;g.w=groupWidth;
+  let y=rowY+16;
+  if(g.header){pos.set(g.header.id,{x:g.x+16,y,w:g.w-32,h:164});y+=180;}
+  else y+=44;
+  const ordered=[],used=new Set(),skills=new Map();
+  if(!g.header||expandedGroups.has(g.id)){
+   for(const n of g.members)if(n.kind==='skill'){if(!skills.has(n.parent))skills.set(n.parent,[]);skills.get(n.parent).push(n);}
+   const append=n=>{if(used.has(n.id))return;used.add(n.id);ordered.push(n);for(const child of skills.get(n.id)||[])append(child);};
+   for(const n of g.members)if(n.kind!=='skill')append(n);
+   for(const n of g.members)append(n);
+  }
+  for(const n of ordered){
+   const inset=n.kind==='skill'?36:16,h=n.kind==='skill'?100:116;
+   pos.set(n.id,{x:g.x+inset,y,w:g.w-inset-16,h});y+=h+16;
+  }
+  g.h=Math.max(180,y-rowY+8);rowHeight=Math.max(rowHeight,g.h);index+=g.header?.kind==='agent'?columns:1;
+ }
+ return {pos,groups,height:Math.max(460,rowY+rowHeight+32)};
+}
+const groupElements=new Map(),messageElements=new Map(),expandedGroups=new Set();
+function toggleGroup(id){
+ if(expandedGroups.has(id))expandedGroups.delete(id);else expandedGroups.add(id);
+ setFollowing(false);selected=id;inspect();layout();
+}
+const supportingWork=new Set(['메시지 보내기','메시지 읽기','메시지 수신 확인','에이전트 메시지 연결']);
+const failedWork=node=>Boolean(node.exitCode)||['오류','failed'].includes(node.status);
+function workPriority(node){
+ if(isInternal(node)||!['tool','skill'].includes(node.kind))return 0;
+ // An unnamed real failure or active task still needs the user's attention.
+ if(failedWork(node)||['running','in_progress','작업 중','진행 중'].includes(node.status))return 2;
+ // Transport bookkeeping and opaque launchers must not replace a named task.
+ // They remain available as a fallback and in the expanded group.
+ if(supportingWork.has(node.label)||/^(코드 실행 · |명령 실행 · [^ ]+$|셸 명령 실행$)/.test(node.label||''))return 1;
+ return 2;
+}
+function groupSummary(g){
+ let work=null,priority=0;
+ for(const n of g.members){
+  const candidate=workPriority(n);
+  if(candidate>priority||(candidate&&candidate===priority&&(!work||compareChronological(n,work)>0))){work=n;priority=candidate;}
+ }
+ return work?'최근 작업 · '+nodeTitle(work)+(failedWork(work)?' · 오류':''):(g.header?.currentTask?'담당 작업 · '+g.header.currentTask:'작업 기록 대기');
+}
+function pruneElements(map,ids){for(const [id,el] of map){if(!ids.has(id)){el.remove();map.delete(id);}}}
+function drawGroups(groups){
+ pruneElements(groupElements,new Set(groups.keys()));
+ for(const g of groups.values()){
+  let el=groupElements.get(g.id);
+  if(!el){el=document.createElement('section');el.className='agent-group';el.setAttribute('role','group');canvas.append(el);groupElements.set(g.id,el);}
+  patchAttribute(el,'aria-label',g.label+' 작업 그룹');
+  patchStyle(el,`left:${g.x}px;top:${g.y}px;width:${g.w}px;height:${g.h}px`);
+  patchHTML(el,g.header?'':'<strong>'+esc(g.label)+'</strong>');
+  const header=g.header&&elements.get(g.id);
+  if(header){
+   const expanded=expandedGroups.has(g.id);
+   patchClass(header,'group-header',true);
+   patchAttribute(header,'aria-expanded',String(expanded));
+   patchAttribute(header,'aria-label',g.label+' · '+(expanded?'그룹 접기':'그룹 펼치기'));
+   patchHTML(header,`<span class="node-top"><span>${esc(nodeKindLabel(g.header))}</span><span>${expanded?'▾ 접기':'▸ 펼치기'}</span></span><b>${esc(g.label)}</b><small>${esc(g.header.status)}</small><span class="group-work" title="${esc(groupSummary(g))}">${esc(groupSummary(g))}</span>`);
+   header.onclick=()=>toggleGroup(g.id);
+  }
+ }
+}
+function messageRoute(a,b,reverse){
+ const ratio=reverse?0.65:0.35;
+ const ay=a.y+a.h*ratio,by=b.y+b.h*(a.id===b.id?0.75:ratio);
+ const sameRow=a.y===b.y&&a.id!==b.id;
+ const right=b.x>a.x;
+ const sx=sameRow&&!right?a.x:a.x+a.w;
+ const tx=sameRow&&right?b.x:b.x+b.w;
+ const x=sameRow?(sx+tx)/2:Math.max(a.x+a.w,b.x+b.w)+90+(reverse?28:0);
+ return {start:{x:sx,y:ay},end:{x:tx,y:by},x,y:(ay+by)/2,
+  path:`M ${sx} ${ay} H ${x} V ${by} H ${tx}`};
+}
+function sizeEdgeLayer(height){
+ // SVG user units and positioned HTML cards must both stay in CSS pixels.
+ // The canvas can be taller than this layout because of min-height:100%.
+ const width=canvas.clientWidth;
+ edges.style.width=width+'px';edges.style.height=height+'px';
+ edges.setAttribute('viewBox',`0 0 ${width} ${height}`);
+}
+function drawMessages(nodes,groups){
+ const pairs=messagePairs(nodes),keys=new Set();let lines='';
+ for(const pair of pairs){
+  const key=JSON.stringify([pair.source,pair.target]),a=groups.get(pair.source),b=groups.get(pair.target);
+  if(!a||!b)continue;
+  keys.add(key);
+  const {path,x,y}=messageRoute(a,b,String(pair.source)>String(pair.target));
+  lines+=`<path class="message-edge" marker-end="url(#message-arrow)" d="${path}"/>`;
+  let el=messageElements.get(key);
+  if(!el){el=document.createElement('button');el.className='message-link';canvas.append(el);messageElements.set(key,el);}
+  patchStyle(el,`left:${x-80}px;top:${y-18}px;width:160px`);
+  patchText(el,agentName(pair.source)+' → '+agentName(pair.target)+' · '+pair.messages.length+'건');
+  patchAttribute(el,'aria-label',el.textContent+' · 메시지 상세 보기');
+  el.onclick=()=>{setFollowing(false);selected=[...pair.messages].sort(compareChronological).at(-1).id;inspect();layout();};
+  patchClass(el,'selected',pair.messages.some(n=>n.id===selected));
+ }
+ pruneElements(messageElements,keys);return lines;
+}
+function drawHierarchy(nodes,pos,groups){
+ let lines='';
+ for(const n of nodes.filter(n=>['agent','subagent'].includes(n.kind))){
+  const parent=groups.get(n.parent)||pos.get(n.parent),target=groups.get(n.id);
+  if(!parent||!target)continue;
+  const sx=parent.x+parent.w/2,sy=parent.y+parent.h,tx=target.x+target.w/2,ty=target.y;
+  const mid=sy+(ty-sy)/2;
+  lines+=`<path class="hierarchy-edge" data-source="${esc(n.parent)}" data-target="${esc(n.id)}" marker-end="url(#hierarchy-arrow)" d="M ${sx} ${sy} V ${mid} H ${tx} V ${ty}"/>`;
+ }
+ return lines;
+}
+let layoutCache=null,scrollFrame=false;
+function graphGeometry(){
+ const width=canvas.clientWidth,key=[...expandedGroups].join('\0');
+ if(!layoutCache||layoutCache.width!==width||layoutCache.key!==key){
+  const nodes=visibleNodes(),geometry=positionsFor(nodes);
+  layoutCache={...geometry,nodes,width,key,skills:nodes.filter(n=>n.kind==='skill'),sorted:[...geometry.pos].sort((a,b)=>a[1].y-b[1].y)};
+ }
+ return layoutCache;
+}
+function viewportCards(geometry){
+ if(geometry.pos.size<=200)return geometry.pos;
+ const viewport=document.querySelector('#viewport'),top=viewport.scrollTop-400,bottom=viewport.scrollTop+viewport.clientHeight+400;
+ const result=new Map(),rows=geometry.sorted;
+ let lo=0,hi=rows.length;
+ while(lo<hi){const mid=(lo+hi)>>1;if(rows[mid][1].y+164<top)lo=mid+1;else hi=mid;}
+ for(let i=lo;i<rows.length&&rows[i][1].y<=bottom;i++)result.set(...rows[i]);
+ // Keep lightweight group headers mounted for navigation and accessibility.
+ for(const g of geometry.groups.values())if(g.header)result.set(g.id,geometry.pos.get(g.id));
+ return result;
+}
+function visibleSkillEdges(nodes,pos){
+ const viewport=document.querySelector('#viewport'),top=viewport.scrollTop-400,bottom=viewport.scrollTop+viewport.clientHeight+400;
+ let lines='';
+ for(const n of nodes){
+  if(n.kind!=='skill')continue;
+  const p=pos.get(n.id),parent=pos.get(n.parent);if(!p||!parent)continue;
+  const from=parent.y+parent.h,to=p.y+p.h/2;
+  if(pos.size>200&&(Math.max(from,to)<top||Math.min(from,to)>bottom))continue;
+  lines+=`<path class="edge skill" data-source="${esc(n.parent)}" data-target="${esc(n.id)}" d="M ${parent.x+12} ${from} V ${to} H ${p.x}"/>`;
+ }
+ return lines;
+}
+function layout(){
+ const geometry=graphGeometry(),{nodes,pos,groups,height}=geometry,painted=viewportCards(geometry);
+ if(canvas.style.height!==height+'px')canvas.style.height=height+'px';
+ const edgeSize=canvas.clientWidth+':'+height;if(edges._size!==edgeSize){sizeEdgeLayer(height);edges._size=edgeSize;}
+ syncCards(painted);
+ if(geometry.decoratedSelection!==selected||!geometry.decorated){
+  drawGroups(groups);geometry.connections=drawHierarchy(nodes,pos,groups)+drawMessages(nodes,groups);geometry.decorated=true;geometry.decoratedSelection=selected;
+ }
+ let lines='<defs><marker id="hierarchy-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#087aff"/></marker><marker id="message-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#168577"/></marker></defs>';
+ for(const [id,p] of painted){
+  const n=indexFor().byId.get(id),el=elements.get(id);if(!el)continue;
+  el.hidden=n.kind==='a2a'||!p;if(!p)continue;
+  patchStyle(el,`left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px`);
+  const selection=indexFor().byId.get(selected);
+  const chosen=n.id===selected||(selection&&!expandedGroups.has(n.id)&&ownerId(selection,data.nodes)===n.id);patchClass(el,'selected',Boolean(chosen));patchAttribute(el,'aria-pressed',String(chosen));
+
+ }
+ patchHTML(edges,lines+visibleSkillEdges(geometry.skills,pos)+geometry.connections);
+ document.querySelector('#counts').textContent=`그룹 ${groups.size} · 표시 카드 ${painted.size} / ${pos.size} · 메시지 방향 ${messageElements.size}`;
+}
+function render(next,followNew=true){
+ layoutCache=null;
+ const sessionChanged=next.sessionId!==data.sessionId;
+ const initialFrame=sessionChanged||next.turn!==turn||visibleNodes().length===0;
+ const priorVisible=new Set(visibleNodes().map(n=>n.id));let newest=null;
+ if(sessionChanged||next.turn!==turn){elements.forEach(e=>e.remove());elements.clear();expandedGroups.clear();turn=next.turn;selected=null;priorVisible.clear();}
+ data=next;graphIndex=null;indexFor();arrivalIds.clear();
+ document.querySelector('#empty').hidden=visibleNodes().length>0;
+ for(const n of visibleNodes())if(!priorVisible.has(n.id)){newest=n.id;if(!initialFrame&&followNew)arrivalIds.add(n.id);}
+ const shown=visibleNodes(),internal=data.nodes.filter(isInternal),errors=internal.filter(n=>n.exitCode||['오류','failed'].includes(n.status)).length;
+ if(followNew&&following&&newest)selected=newest;
+ if(!shown.some(n=>n.id===selected))selected=shown.at(-1)?.id;
+ const toggle=document.querySelector('#internals');toggle.setAttribute('aria-expanded',String(showInternal));toggle.textContent=`내부 이벤트 ${showInternal?'접기':'펼치기'} · ${internal.length}${errors?' · 오류 '+errors:''}`;
+ document.querySelector('#counts').textContent=`표시 ${shown.length} / 전체 ${data.nodes.length} 노드`;
+ document.querySelector('#turn').textContent='턴 '+(turn||'대기');
+ document.querySelector('#latest').textContent='최근 표시 노드 '+clock(shown.at(-1)?.at)+(showInternal?' · 내부 이벤트 포함':' · 작업 중심');
+ inspect();layout();if(followNew&&following&&newest)followNode(newest,initialFrame);
+}
+document.querySelector('#viewport').style.overflowAnchor='none';
+document.querySelector('#viewport').addEventListener('scroll',()=>{if(scrollFrame)return;scrollFrame=true;requestAnimationFrame(()=>{scrollFrame=false;layout();});},{passive:true});
+document.querySelector('#internals').onclick=()=>{showInternal=!showInternal;render(data,false);};
+function followNode(id,immediate=false){
+ const move=()=>{
+ if(!following||paused||selected!==id)return;
+ const node=indexFor().byId.get(id),geometry=graphGeometry();
+ const message=node?.kind==='a2a'?messageElements.get(JSON.stringify([node.source,node.target])):null;
+ const rect=message?{x:message.offsetLeft,y:message.offsetTop,w:message.offsetWidth,h:message.offsetHeight}:geometry.pos.get(id)||geometry.pos.get(ownerId(node||{},data.nodes));
+ if(!rect)return;
+ const viewport=document.querySelector('#viewport'),top=rect.y,bottom=top+rect.h,left=rect.x,right=left+rect.w;
+ const outsideY=top<viewport.scrollTop+24||bottom>viewport.scrollTop+viewport.clientHeight-24;
+ const outsideX=left<viewport.scrollLeft+24||right>viewport.scrollLeft+viewport.clientWidth-24;
+ if(outsideY||outsideX){
+ viewport.scrollTo({top:outsideY?Math.max(0,top-viewport.clientHeight/2+rect.h/2):viewport.scrollTop,left:outsideX?Math.max(0,left-viewport.clientWidth/2+rect.w/2):viewport.scrollLeft,behavior:immediate||matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+ }
+ };
+ // Position the first snapshot before paint; animate only subsequent live updates.
+ if(immediate)move();else requestAnimationFrame(move);
+}
+function setFollowing(value){following=value;const button=document.querySelector("#follow");button.setAttribute("aria-pressed",String(value));button.textContent="자동 따라가기 · "+(value?"켜짐":"꺼짐");}
+document.querySelector("#follow").onclick=()=>{setFollowing(!following);if(following){selected=visibleNodes().at(-1)?.id;inspect();layout();followNode(selected);}};
+let activeSession=typeof location==='undefined'?'':new URLSearchParams(location.search).get('session')||'';
+let sessionItems=[],sampleMode=false;
+let registrationGeneration=0;
+function showSessionView(){document.querySelector('#overview').hidden=sampleMode||Boolean(activeSession);document.querySelector('#flow-view').hidden=!sampleMode&&!activeSession;}
+function showOverview(){const wasSample=sampleMode;registrationGeneration++;setSampleChrome(false);activeSession='';revision=-1;showSessionView();document.querySelector('#heartbeat').textContent='세션 목록 대기';if(wasSample)document.querySelector('#open-sample').focus?.();if(typeof history!=='undefined')history.replaceState(null,'','/');connectEvents();}
+document.querySelector('#all-sessions').onclick=showOverview;
+function renderSessionCards(){
+ const query=(document.querySelector('#session-search').value||'').toLowerCase();
+ const items=sessionItems.filter(s=>(s.label+' '+(s.project||'')+' '+s.sessionId).toLowerCase().includes(query));
+ document.querySelector('#session-total').textContent='세션 '+sessionItems.length+'개';
+ document.querySelector('#overview-empty').hidden=items.length>0;
+ document.querySelector('#overview-empty').textContent=sessionItems.length?'검색 결과가 없습니다.':'연결된 세션이 없습니다. 샘플로 화면을 살펴보거나 내 세션을 연결하세요.';
+ document.querySelector('#session-grid').innerHTML=items.map(s=>'<a class="session-card" href="?session='+encodeURIComponent(s.sessionId)+'"><div class="session-card-top"><strong>'+esc(s.label)+'</strong><span class="badge '+(s.registered?'connected':'')+'">'+(s.error?'기록 읽기 오류':s.registered?'수집 연결됨':'실행 흐름 보기')+'</span></div><time>기록 갱신 · '+esc((s.updatedAt||s.lastEvent)?new Date(s.updatedAt||s.lastEvent).toLocaleString('ko-KR'):'시각 미수집')+'</time><div class="session-card-bottom"><span>'+esc((s.project?s.project+' · ':'')+s.sessionId.slice(-8))+'</span><span>열기 ↗</span></div></a>').join('');
+}
+document.querySelector('#session-search').oninput=renderSessionCards;
+showSessionView();
+function selectSession(id){
+ registrationGeneration++;setSampleChrome(false);activeSession=id;revision=-1;paused=false;showSessionView();
+ document.querySelector('#pause').textContent='화면 갱신 멈춤';
+ render({sessionId:id,turn:null,nodes:[]},false);
+ if(typeof history!=='undefined')history.replaceState(null,'','?session='+encodeURIComponent(id));
+ connectEvents();
+}
+function updateSessions(sessions){
+ if(sampleMode)return;
+ sessionItems=sessions;renderSessionCards();
+ const current=sessions.find(s=>s.sessionId===activeSession);
+ document.querySelector('#session-title').textContent=current?.label||'세션 연결 대기';
+ document.querySelector('#current-session-name').textContent=current?current.label:'세션 연결 중…';
+}
+function sessionInput(source,label){
+ source=source.trim();label=label.trim();
+ if(!source.startsWith('/')&&!source.startsWith('~/'))throw Error('파일의 전체 경로를 입력하세요. Finder에서 파일을 선택하고 ⌥⌘C로 복사할 수 있습니다.');
+ if(!source.endsWith('.jsonl'))throw Error('폴더가 아닌 .jsonl 대화 기록 파일을 선택하세요.');
+ if([...label].length>100)throw Error('세션 이름은 100자 이내로 입력하세요.');
+ return {source,label:label||null};
+}
+document.querySelector('#session-form').onsubmit=async e=>{
+ e.preventDefault();const registration=++registrationGeneration;const feedback=document.querySelector('#session-feedback');
+ let payload;
+ try{payload=sessionInput(document.querySelector('#session-source').value,document.querySelector('#session-label').value||'');}
+ catch(error){feedback.textContent=error.message;return;}
+ document.querySelector('#session-source').value=payload.source;feedback.textContent='세션 연결 중…';
+ try{
+  const response=await fetch('/api/sessions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(10000)});
+  if(registration!==registrationGeneration)return;
+  if(!response.ok){feedback.textContent='기록을 읽을 수 없습니다. 파일이 존재하고 읽기 권한이 있는지, 선택한 Codex 대화의 JSONL 파일인지 확인하세요.';return;}
+  const result=await response.json();if(registration!==registrationGeneration)return;selectSession(result.sessionId);feedback.textContent='연결됨';
+ }catch(error){if(registration!==registrationGeneration)return;feedback.textContent='서버에서 응답을 받지 못했습니다. 터미널에서 Observer가 실행 중인지 확인한 뒤 다시 연결하세요.';}
+};
+let eventStream=null, connectionGeneration=0, latestState=null;
+function connectionStatus(state,text){const el=document.querySelector('#status');el.dataset.state=state;el.textContent=text;}
+function applyLiveState(next){
+ if(sampleMode)return;
+ latestState=next;
+ document.querySelector('#auto-agents').textContent=next.autoAgents?'자식 자동 연결 '+next.autoAgents.connected+(next.autoAgents.pending?' · 대기 '+next.autoAgents.pending:''):'';
+ document.querySelector('#heartbeat').textContent='마지막 이벤트 '+clock(next.checkedAt)+(next.agentSourceErrors?.length?' · 자식 기록 연결 오류':'');
+ connectionStatus(next.error?'offline':paused?'paused':'online',next.error?'기록 읽기 오류':paused?'연결됨 · 화면 정지':next.transport?.fileWatch===false?'SSE 연결됨 · 파일 알림 복구 중':'실시간 연결됨 · SSE');
+ if(!paused&&(next.revision!==revision||next.sessionId!==data.sessionId)){render(next);revision=next.revision;}
+}
+// Keep the transport baseline current even while rendering is paused.
+function mergeStreamDelta(previous,patch,requested){
+ if(!previous||patch.sessionId!==requested||patch.metadata.sessionId!==requested||patch.baseSequence!==previous.sequence||patch.sequence!==previous.sequence+1||patch.metadata.turn!==previous.turn)throw Error('Delta baseline mismatch');
+ const nodes=new Map(previous.nodes.map(node=>[node.id,node]));
+ for(const id of patch.removed)nodes.delete(id);
+ for(const node of patch.upsert)nodes.set(node.id,node);
+ let ordered;
+ if(patch.order){
+  if(patch.order.length!==nodes.size||new Set(patch.order).size!==nodes.size||patch.order.some(id=>!nodes.has(id)))throw Error('Delta order mismatch');
+  ordered=patch.order.map(id=>nodes.get(id));
+ }else ordered=Array.from(nodes.values());
+ return {...patch.metadata,nodes:ordered,sequence:patch.sequence};
+}
+function startEventStream(requested,generation){
+ if(sampleMode||generation!==connectionGeneration)return;
+ const stream=new EventSource('/api/events'+(requested?'?format=delta&session='+encodeURIComponent(requested):''));eventStream=stream;
+ let assembled=null;
+ const current=()=>!sampleMode&&generation===connectionGeneration&&stream===eventStream&&requested===activeSession;
+ stream.addEventListener('sessions',event=>{if(current())updateSessions(JSON.parse(event.data).sessions);});
+ stream.addEventListener('state',event=>{if(!current())return;const next=JSON.parse(event.data);if(next.sessionId===requested){assembled=next;applyLiveState(next);}});
+ stream.addEventListener('delta',event=>{
+  if(!current())return;
+  try{
+   const patch=JSON.parse(event.data);
+   assembled=mergeStreamDelta(assembled,patch,requested);
+   applyLiveState(assembled);
+  }catch(error){stream.close();connectEvents();}
+ });
+ stream.onopen=()=>{if(current())connectionStatus(paused?'paused':'online',paused?'연결됨 · 화면 정지':requested?'실시간 연결됨 · SSE':'세션 목록 연결됨 · SSE');};
+ stream.onerror=()=>{
+  if(!current())return;connectionStatus('offline','SSE 재연결 중…');
+  // A restarted server may have lost the selected registration. A terminal
+  // HTTP error closes EventSource; reopen only this explicitly selected session.
+  if(stream.readyState===2)setTimeout(()=>{if(current())connectEvents();},3000);
+ };
+}
+async function connectEvents(){
+ if(sampleMode)return;
+ const generation=++connectionGeneration,requested=activeSession;
+ eventStream?.close();eventStream=null;latestState=null;
+ connectionStatus('connecting','SSE 연결 중…');
+ if(!requested){startEventStream(requested,generation);return;}
+ try{
+  // Opening is an explicit selection, never an automatic catalog-body read.
+  const opened=await fetch('/api/sessions/open',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:requested}),signal:AbortSignal.timeout(5000)});
+  if(!opened.ok)throw Error();
+  startEventStream(requested,generation);
+ }catch(error){
+  if(generation!==connectionGeneration)return;
+  connectionStatus('offline','세션 연결 실패 · 다시 시도 중…');
+  setTimeout(()=>{if(generation===connectionGeneration)connectEvents();},3000);
+ }
+}
+
+// A client-only fixture: entering sample mode invalidates pending responses and
+// closes the stream. No transcript, managed worker, or export path is invoked.
+function syntheticSnapshot(){
+ return {sessionId:'synthetic-sample',turn:'synthetic-example',revision:'sample-1',nodes:[
+  {id:'request',kind:'request',label:'가상의 문서 점검 요청',status:'합성 예시'},
+  {id:'agent',kind:'agent',label:'샘플 메인 에이전트',parent:'request',status:'합성 예시'},
+  {id:'sample-read',kind:'tool',label:'가상 문서 읽기',toolName:'read_document',parent:'agent',ownerAgent:'agent',status:'합성 예시'},
+  {id:'sample-skill',kind:'skill',label:'예시 스킬 읽기',parent:'sample-read',ownerAgent:'agent',status:'합성 예시',evidence:'화면 설명용 스킬 읽기 예시. 실제 적용 여부를 뜻하지 않습니다.'},
+  {id:'sample-ux',kind:'subagent',label:'샘플 UX 작업자',agentPath:'샘플 UX 작업자',parent:'agent',status:'합성 예시'},
+  {id:'sample-review',kind:'tool',label:'메시지 화면 검토',toolName:'review_view',ownerAgent:'sample-ux',parent:'sample-ux',status:'합성 예시'},
+  {id:'sample-message',kind:'a2a',source:'agent',target:'sample-ux',body:'가상 검토 요청입니다. 대화 내용을 읽기 쉽게 표시하는지 확인해주세요.',bodySource:'synthetic',status:'합성 예시',evidence:'브라우저에 내장된 합성 기록'},
+  {id:'sample-reply',kind:'a2a',source:'sample-ux',target:'agent',body:'가상 검토 의견입니다. 연결선을 누르면 양방향 대화를 확인할 수 있습니다.',bodySource:'synthetic',status:'합성 예시'},
+ ]};
+}
+function setSampleChrome(enabled){
+ sampleMode=enabled;
+ document.querySelector('#sample-notice').hidden=!enabled;
+ document.querySelector('#sample-inspector').hidden=!enabled;
+ for(const id of ['pause','follow','auto-agents'])document.querySelector('#'+id).hidden=enabled;
+}
+function openSample(){
+ registrationGeneration++;connectionGeneration++;eventStream?.close();eventStream=null;latestState=null;
+ activeSession='';revision=-1;paused=false;setSampleChrome(true);showSessionView();
+ render(syntheticSnapshot(),false);
+ expandedGroups.add('agent');expandedGroups.add('sample-ux');selected='sample-message';inspect();layout();
+ document.querySelector('#viewport').scrollTo({top:0,left:0,behavior:'instant'});
+ document.querySelector('#session-title').textContent='합성 샘플';
+ document.querySelector('#current-session-name').textContent='합성 샘플';
+ document.querySelector('#turn').textContent='화면 설명용 가상 실행';
+ document.querySelector('#latest').textContent='합성 샘플 · 실제 기록 수집 없음';
+ document.querySelector('#heartbeat').textContent='실시간 연결 없음';connectionStatus('sample','샘플 보기');
+ if(typeof history!=='undefined')history.replaceState(null,'','/?demo=1');
+ document.querySelector('#flow-heading').focus?.();
+}
+document.querySelector('#open-sample').onclick=openSample;
+
+document.querySelector('#pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'화면 갱신 재개':'화면 갱신 멈춤';if(latestState)applyLiveState(latestState);};new ResizeObserver(layout).observe(canvas);
+if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('demo')==='1')openSample();else connectEvents();
+</script></body></html>

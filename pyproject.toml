@@ -1,0 +1,6 @@
+[project]
+name = "agent-observer"
+version = "0.1.0"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+dependencies = []

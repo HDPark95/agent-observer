@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "observer": {
+      "type": "stdio",
+      "command": "./bin/agent-observer",
+      "args": ["mcp"],
+      "cwd": "${PLUGIN_ROOT}"
+    }
+  }
+}

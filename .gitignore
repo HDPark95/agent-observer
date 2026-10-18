@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+*.jsonl
+.local/
+bin/
+
+dist/
+
+# Local credentials, agent settings, and runtime output.
+.env
+.env.*
+.codex/
+.claude/
+.ssh/
+.aws/
+.runs/
+.state/
+*.log
+*.token
+*.pem
+*.key
+*.p12
+*.pfx

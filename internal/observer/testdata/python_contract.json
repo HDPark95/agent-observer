@@ -1,0 +1,6348 @@
+[
+  {
+    "name": "start",
+    "target": "root",
+    "content": "{\"type\": \"session_meta\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"id\": \"root-thread\"}}\n{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"task_started\", \"turn_id\": \"turn\"}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 0
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "spawn ux",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"SubAgentActivity\", \"id\": \"spawn-ux\", \"agent_path\": \"/root/ux\", \"agent_thread_id\": \"ux\", \"kind\": \"started\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 1
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "spawn dx",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"SubAgentActivity\", \"id\": \"spawn-dx\", \"agent_path\": \"/root/dx\", \"agent_thread_id\": \"dx\", \"kind\": \"started\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 0",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-0\", \"command\": [\"sh\", \"-c\", \"python3 -m unittest discover -s tests -v\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 1",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-1\", \"command\": [\"sh\", \"-c\", \"uv run --offline --no-sync python -m tools.observation_workflow finish\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 2",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-2\", \"command\": [\"sh\", \"-c\", \"node checks/initial_render.cjs\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 3",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-3\", \"command\": [\"sh\", \"-c\", \"pnpm run typecheck\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 4",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-4\", \"command\": [\"sh\", \"-c\", \"rg --files\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 5",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-5\", \"command\": [\"sh\", \"-c\", \"ls\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 6",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-6\", \"command\": [\"sh\", \"-c\", \"python3 file.py\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 7",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-7\", \"command\": [\"sh\", \"-c\", \"git status\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 8",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-8\", \"command\": [\"sh\", \"-c\", \"echo SECRET\"], \"exit_code\": 0, \"parsed_cmd\": []}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "command 9",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"cmd-9\", \"command\": [\"sh\", \"-c\", \"cat /skills/demo/SKILL.md\"], \"exit_code\": 0, \"parsed_cmd\": [{\"type\": \"read\", \"path\": \"/skills/demo/SKILL.md\"}]}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "FileChange",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"FileChange\", \"id\": \"generic-0\", \"phase\": \"final\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "ImageView",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"ImageView\", \"id\": \"generic-1\", \"phase\": \"final\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "WebSearch",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"WebSearch\", \"id\": \"generic-2\", \"phase\": \"final\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "AgentMessage",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"AgentMessage\", \"id\": \"generic-3\", \"phase\": \"final\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "browser",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"McpToolCall\", \"id\": \"browse\", \"server\": \"cua_repl\", \"tool\": \"js\", \"arguments\": {\"code\": \"await tab.goto('https://app.slack.com/x'); await tab.getAXState();\"}, \"result\": {\"content\": [{\"type\": \"text\", \"text\": \"Browser tab: 1, Title: \\\"PRIVATE\\\", URL: \\\"https://app.slack.com/x\\\".\\nBODY\"}]}, \"status\": \"completed\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "generic mcp",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"McpToolCall\", \"id\": \"mcp\", \"server\": \"service\", \"tool\": \"read\", \"status\": \"completed\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "call starts",
+    "target": "root",
+    "content": "{\"type\": \"response_item\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"function_call\", \"call_id\": \"wrap\", \"name\": \"functions.exec\", \"arguments\": \"SECRET\"}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 대기",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "call returns",
+    "target": "root",
+    "content": "{\"type\": \"response_item\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"function_call_output\", \"call_id\": \"wrap\", \"output\": \"SECRET\"}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "child message",
+    "target": "child",
+    "content": "{\"type\": \"session_meta\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"id\": \"ux\", \"agent_path\": \"/root/ux\", \"parent_thread_id\": \"root-thread\", \"subagent_history_start_ordinal\": 5}}\n{\"type\": \"response_item\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"function_call\", \"namespace\": \"collaboration\", \"name\": \"send_message\", \"call_id\": \"inherited\", \"arguments\": \"{\\\"target\\\": \\\"dx\\\", \\\"message\\\": \\\"inherited\\\"}\"}, \"ordinal\": 2}\n{\"type\": \"response_item\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"function_call\", \"namespace\": \"collaboration\", \"name\": \"send_message\", \"call_id\": \"hello\", \"arguments\": \"{\\\"target\\\": \\\"dx\\\", \\\"message\\\": \\\"\\\\uc548\\\\ub155\\\\n\\\\uac80\\\\uc0ac \\\\uc644\\\\ub8cc token=private\\\"}\"}, \"ordinal\": 5}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        },
+        {
+          "id": "a2a:/root/ux:hello",
+          "sender": "/root/ux",
+          "recipient": "/root/dx",
+          "at": "2026-10-15T01:00:00Z",
+          "returned": false,
+          "body": "안녕\n검사 완료 token=[가림]",
+          "bodyUnavailable": null,
+          "kind": "a2a",
+          "label": "ux → dx",
+          "parent": "subagent:/root/ux",
+          "source": "subagent:/root/ux",
+          "target": "subagent:/root/dx",
+          "status": "송신 호출 관측",
+          "evidence": "선택한 자식 기록의 collaboration.send_message · 송수신 경로",
+          "scope": "호출 반환은 상대의 수신·이해 확인과 다릅니다. 본문은 선택한 기록에서 읽어 로컬에 표시합니다."
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "child tool skill",
+    "target": "child",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"child-tool\", \"command\": [\"sh\", \"-c\", \"cat /skills/demo/SKILL.md\"], \"exit_code\": 0, \"parsed_cmd\": [{\"type\": \"read\", \"path\": \"/skills/demo/SKILL.md\"}]}}, \"ordinal\": 6}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        },
+        {
+          "id": "a2a:/root/ux:hello",
+          "sender": "/root/ux",
+          "recipient": "/root/dx",
+          "at": "2026-10-15T01:00:00Z",
+          "returned": false,
+          "body": "안녕\n검사 완료 token=[가림]",
+          "bodyUnavailable": null,
+          "kind": "a2a",
+          "label": "ux → dx",
+          "parent": "subagent:/root/ux",
+          "source": "subagent:/root/ux",
+          "target": "subagent:/root/dx",
+          "status": "송신 호출 관측",
+          "evidence": "선택한 자식 기록의 collaboration.send_message · 송수신 경로",
+          "scope": "호출 반환은 상대의 수신·이해 확인과 다릅니다. 본문은 선택한 기록에서 읽어 로컬에 표시합니다."
+        },
+        {
+          "id": "child:ux:child-tool",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "subagent:/root/ux",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null,
+          "ownerAgent": "subagent:/root/ux",
+          "ownerLabel": "ux",
+          "childActivity": true
+        },
+        {
+          "id": "child:ux:child-tool:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "child:ux:child-tool",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정",
+          "ownerAgent": "subagent:/root/ux",
+          "ownerLabel": "ux",
+          "childActivity": true
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "message return",
+    "target": "child",
+    "content": "{\"type\": \"response_item\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"function_call_output\", \"call_id\": \"hello\", \"output\": \"SECRET\"}, \"ordinal\": 7}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        },
+        {
+          "id": "a2a:/root/ux:hello",
+          "sender": "/root/ux",
+          "recipient": "/root/dx",
+          "at": "2026-10-15T01:00:00Z",
+          "returned": true,
+          "body": "안녕\n검사 완료 token=[가림]",
+          "bodyUnavailable": null,
+          "kind": "a2a",
+          "label": "ux → dx",
+          "parent": "subagent:/root/ux",
+          "source": "subagent:/root/ux",
+          "target": "subagent:/root/dx",
+          "status": "호출 반환 관측",
+          "evidence": "선택한 자식 기록의 collaboration.send_message · 송수신 경로",
+          "scope": "호출 반환은 상대의 수신·이해 확인과 다릅니다. 본문은 선택한 기록에서 읽어 로컬에 표시합니다."
+        },
+        {
+          "id": "child:ux:child-tool",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "subagent:/root/ux",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null,
+          "ownerAgent": "subagent:/root/ux",
+          "ownerLabel": "ux",
+          "childActivity": true
+        },
+        {
+          "id": "child:ux:child-tool:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "child:ux:child-tool",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정",
+          "ownerAgent": "subagent:/root/ux",
+          "ownerLabel": "ux",
+          "childActivity": true
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "encrypted body",
+    "target": "child",
+    "content": "{\"type\": \"response_item\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"function_call\", \"namespace\": \"collaboration\", \"name\": \"send_message\", \"call_id\": \"encrypted\", \"arguments\": \"{\\\"target\\\": \\\"dx\\\", \\\"message\\\": \\\"gAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\"}\"}, \"ordinal\": 8}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        },
+        {
+          "id": "a2a:/root/ux:encrypted",
+          "sender": "/root/ux",
+          "recipient": "/root/dx",
+          "at": "2026-10-15T01:00:00Z",
+          "returned": false,
+          "body": null,
+          "bodyUnavailable": "encrypted",
+          "kind": "a2a",
+          "label": "ux → dx",
+          "parent": "subagent:/root/ux",
+          "source": "subagent:/root/ux",
+          "target": "subagent:/root/dx",
+          "status": "송신 호출 관측",
+          "evidence": "선택한 자식 기록의 collaboration.send_message · 송수신 경로",
+          "scope": "호출 반환은 상대의 수신·이해 확인과 다릅니다. 본문은 선택한 기록에서 읽어 로컬에 표시합니다."
+        },
+        {
+          "id": "a2a:/root/ux:hello",
+          "sender": "/root/ux",
+          "recipient": "/root/dx",
+          "at": "2026-10-15T01:00:00Z",
+          "returned": true,
+          "body": "안녕\n검사 완료 token=[가림]",
+          "bodyUnavailable": null,
+          "kind": "a2a",
+          "label": "ux → dx",
+          "parent": "subagent:/root/ux",
+          "source": "subagent:/root/ux",
+          "target": "subagent:/root/dx",
+          "status": "호출 반환 관측",
+          "evidence": "선택한 자식 기록의 collaboration.send_message · 송수신 경로",
+          "scope": "호출 반환은 상대의 수신·이해 확인과 다릅니다. 본문은 선택한 기록에서 읽어 로컬에 표시합니다."
+        },
+        {
+          "id": "child:ux:child-tool",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "subagent:/root/ux",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null,
+          "ownerAgent": "subagent:/root/ux",
+          "ownerLabel": "ux",
+          "childActivity": true
+        },
+        {
+          "id": "child:ux:child-tool:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "child:ux:child-tool",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정",
+          "ownerAgent": "subagent:/root/ux",
+          "ownerLabel": "ux",
+          "childActivity": true
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "idle",
+    "target": "root",
+    "content": "",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        },
+        {
+          "id": "a2a:/root/ux:encrypted",
+          "sender": "/root/ux",
+          "recipient": "/root/dx",
+          "at": "2026-10-15T01:00:00Z",
+          "returned": false,
+          "body": null,
+          "bodyUnavailable": "encrypted",
+          "kind": "a2a",
+          "label": "ux → dx",
+          "parent": "subagent:/root/ux",
+          "source": "subagent:/root/ux",
+          "target": "subagent:/root/dx",
+          "status": "송신 호출 관측",
+          "evidence": "선택한 자식 기록의 collaboration.send_message · 송수신 경로",
+          "scope": "호출 반환은 상대의 수신·이해 확인과 다릅니다. 본문은 선택한 기록에서 읽어 로컬에 표시합니다."
+        },
+        {
+          "id": "a2a:/root/ux:hello",
+          "sender": "/root/ux",
+          "recipient": "/root/dx",
+          "at": "2026-10-15T01:00:00Z",
+          "returned": true,
+          "body": "안녕\n검사 완료 token=[가림]",
+          "bodyUnavailable": null,
+          "kind": "a2a",
+          "label": "ux → dx",
+          "parent": "subagent:/root/ux",
+          "source": "subagent:/root/ux",
+          "target": "subagent:/root/dx",
+          "status": "호출 반환 관측",
+          "evidence": "선택한 자식 기록의 collaboration.send_message · 송수신 경로",
+          "scope": "호출 반환은 상대의 수신·이해 확인과 다릅니다. 본문은 선택한 기록에서 읽어 로컬에 표시합니다."
+        },
+        {
+          "id": "child:ux:child-tool",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "subagent:/root/ux",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null,
+          "ownerAgent": "subagent:/root/ux",
+          "ownerLabel": "ux",
+          "childActivity": true
+        },
+        {
+          "id": "child:ux:child-tool:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "child:ux:child-tool",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정",
+          "ownerAgent": "subagent:/root/ux",
+          "ownerLabel": "ux",
+          "childActivity": true
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "child truncate",
+    "target": "child",
+    "content": "",
+    "mode": "replace",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "partial line",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"CommandExecution\", \"id\": \"partial\", \"command\": [\"sh\", \"-c\", \"node --test\"], \"exit_code\": 1}}}",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "completed line",
+    "target": "root",
+    "content": "\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        },
+        {
+          "id": "partial",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "오류",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 1,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "complete agent",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"item_completed\", \"turn_id\": \"turn\", \"item\": {\"type\": \"SubAgentActivity\", \"id\": \"done\", \"agent_path\": \"/root/ux\", \"agent_thread_id\": \"ux\", \"kind\": \"completed\"}}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 2
+      },
+      "agentSourceErrors": [],
+      "turn": "turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        },
+        {
+          "id": "subagent:/root/ux",
+          "kind": "subagent",
+          "label": "ux",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "agentPath": "/root/ux",
+          "threadId": "ux",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "subagent:/root/dx",
+          "kind": "subagent",
+          "label": "dx",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "생성 관측",
+          "parent": "agent",
+          "agentPath": "/root/dx",
+          "threadId": "dx",
+          "updatedAt": "2026-10-15T01:00:00Z",
+          "evidence": "SubAgentActivity · 에이전트 상태 기록"
+        },
+        {
+          "id": "cmd-0",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-1",
+          "kind": "tool",
+          "label": "작업 관찰 · 마감",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "tools.observation_workflow",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-2",
+          "kind": "tool",
+          "label": "화면 동작 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-3",
+          "kind": "tool",
+          "label": "타입 검사",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "pnpm",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-4",
+          "kind": "tool",
+          "label": "파일 목록 검색 · rg",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "rg",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-5",
+          "kind": "tool",
+          "label": "파일 목록 · ls",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "ls",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-6",
+          "kind": "tool",
+          "label": "스크립트 실행 · file.py",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "python3",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-7",
+          "kind": "tool",
+          "label": "명령 실행 · git status",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "git",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-8",
+          "kind": "tool",
+          "label": "셸 명령 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "shell",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9",
+          "kind": "tool",
+          "label": "스킬 읽기 · demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "toolName": "cat",
+          "exitCode": 0,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "cmd-9:skill:demo",
+          "kind": "skill",
+          "label": "demo",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "읽기 시도",
+          "parent": "cmd-9",
+          "evidence": "parsed_cmd.type=read · 개별 읽기 결과 미수집 · 실제 적용 여부 미판정"
+        },
+        {
+          "id": "generic-0",
+          "kind": "tool",
+          "label": "FileChange",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-1",
+          "kind": "tool",
+          "label": "ImageView",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-2",
+          "kind": "tool",
+          "label": "WebSearch",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "generic-3",
+          "kind": "message",
+          "label": "최종 답변",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "완료 관측",
+          "parent": "agent",
+          "evidence": "메시지 메타데이터 · 원문 미전송"
+        },
+        {
+          "id": "browse",
+          "kind": "tool",
+          "label": "app.slack.com · 페이지 이동 · 화면 읽기",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "호출 완료 관측",
+          "parent": "agent",
+          "evidence": "브라우저 호출 메서드 및 반환된 탭 헤더 기반 분류",
+          "startMs": null,
+          "endMs": null,
+          "toolName": "cua_repl.js",
+          "browserActions": [
+            "페이지 이동",
+            "화면 읽기"
+          ],
+          "browserSites": [
+            "app.slack.com"
+          ],
+          "scope": "행동 분류는 추정이며 읽기·클릭의 성공이나 문서 이해를 뜻하지 않습니다. 페이지 제목·본문·URL 경로·입력값은 저장하지 않습니다."
+        },
+        {
+          "id": "mcp",
+          "kind": "tool",
+          "label": "service / read",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "completed",
+          "parent": "agent",
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        },
+        {
+          "id": "wrap",
+          "kind": "call",
+          "label": "functions.exec",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "반환 관측",
+          "parent": "agent",
+          "evidence": "도구 호출 시작 기록",
+          "scope": "호출 묶음 · 내부 도구와 중복 집계 금지",
+          "ended": "2026-10-15T01:00:00Z"
+        },
+        {
+          "id": "partial",
+          "kind": "tool",
+          "label": "테스트 실행",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "오류",
+          "parent": "agent",
+          "toolName": "node",
+          "exitCode": 1,
+          "evidence": "item_completed · 완료 후 관측",
+          "startMs": null,
+          "endMs": null
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "turn reset",
+    "target": "root",
+    "content": "{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"task_started\", \"turn_id\": \"new-turn\"}}\n",
+    "mode": "append",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 0
+      },
+      "agentSourceErrors": [],
+      "turn": "new-turn",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  },
+  {
+    "name": "file truncate",
+    "target": "root",
+    "content": "{\"type\": \"session_meta\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"id\": \"root-thread\"}}\n{\"type\": \"event_msg\", \"timestamp\": \"2026-10-15T01:00:00Z\", \"payload\": {\"type\": \"task_started\", \"turn_id\": \"replaced\"}}\n",
+    "mode": "replace",
+    "expected": {
+      "autoAgents": {
+        "connected": 0,
+        "pending": 0
+      },
+      "agentSourceErrors": [],
+      "turn": "replaced",
+      "started": "2026-10-15T01:00:00Z",
+      "nodes": [
+        {
+          "id": "request",
+          "kind": "request",
+          "label": "사용자 요청",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "요청 관측",
+          "parent": null
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "Codex 에이전트",
+          "at": "2026-10-15T01:00:00Z",
+          "status": "작업 중",
+          "parent": "request"
+        }
+      ],
+      "lastEvent": "2026-10-15T01:00:00Z",
+      "error": null,
+      "mode": "실제 transcript 증분 읽기 · 0.5초 폴링"
+    }
+  }
+]

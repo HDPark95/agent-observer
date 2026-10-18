@@ -1,0 +1,53 @@
+name: candidate-checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
+        with:
+          go-version: '1.26.4'
+          cache: false
+      - name: Verify target and runtime prerequisites
+        run: |
+          test "$(uname -m)" = arm64
+          test "$(go env GOARCH)" = arm64
+          python3 --version
+          node --version
+      - name: Verify public repository inventory
+        run: python3 scripts/package_release.py check-tree
+      - name: Package and test the shipped source
+        run: |
+          python3 scripts/package_release.py source --output "$RUNNER_TEMP/observer-package"
+          python3 scripts/package_release.py unpack "$RUNNER_TEMP/observer-package/agent-observer-0.1.0-rc1-source.tar.gz" --destination "$RUNNER_TEMP/observer-source"
+          cd "$RUNNER_TEMP/observer-source"
+          make check
+          make build
+          python3 scripts/smoke_release.py ./bin/agent-observer
+          python3 scripts/smoke_release.py ./bin/agent-observer --clean-profile
+      - name: Build and smoke the binary artifact
+        run: |
+          python3 scripts/package_release.py binary "$RUNNER_TEMP/observer-package/agent-observer-0.1.0-rc1-source.tar.gz" --output "$RUNNER_TEMP/observer-binary"
+          python3 scripts/package_release.py unpack "$RUNNER_TEMP/observer-binary/agent-observer-0.1.0-rc1-darwin-arm64.tar.gz" --destination "$RUNNER_TEMP/observer-install"
+          python3 scripts/smoke_release.py "$RUNNER_TEMP/observer-install/agent-observer"
+          python3 scripts/smoke_release.py "$RUNNER_TEMP/observer-install/agent-observer" --clean-profile
+  minimum-go:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
+        with:
+          go-version: '1.22.12'
+          cache: false
+      - run: go test ./...
+        env:
+          GOTOOLCHAIN: local

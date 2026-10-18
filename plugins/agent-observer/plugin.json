@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "agent-observer",
+  "version": "0.1.0-rc4",
+  "description": "Observe selected sessions and run managed agent teams with durable, visible conversations.",
+  "license": "MIT",
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "onboardingSkill": "./skills/observe-session/SKILL.md",
+      "interface": {
+        "displayName": "Agent Observer",
+        "shortDescription": "Observe sessions and run managed teams",
+        "defaultPrompt": ["Start an Observer-managed UX and DX team for my selected session and show their conversation."]
+      }
+    }
+  }
+}
