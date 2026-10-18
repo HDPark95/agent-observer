@@ -4,7 +4,16 @@ The local plugin bundles one skill and a native stdio MCP server. It starts the 
 
 ## Build and install
 
-From a cloned source repository, use Go, Make, and Python 3.9+ to build the plugin for the current machine:
+You need Git, Go, Make, Python 3.9+, and a working Codex CLI with plugin support. First check:
+
+```sh
+codex --version
+codex plugin --help
+```
+
+If `codex` reports `env: node: No such file or directory`, its npm launcher needs Node.js on `PATH`. Fix the CLI installation first; Observer's bundled Go executable itself does not need Node.js. These installation commands were verified with Codex CLI 0.142.2 on macOS Apple Silicon.
+
+From the **root of the cloned repository**, build and install for the current machine:
 
 ```sh
 make plugin
@@ -15,6 +24,10 @@ codex plugin add agent-observer@agent-observer-local
 The package includes its Go executable; it does not run `go build` when Codex starts. Install on the same OS and CPU architecture as the build machine. macOS Apple Silicon is the currently verified target. This local installation does not publish the plugin to a public directory.
 
 Open a new Codex chat after installation so it loads the plugin. If the current desktop app does not refresh its plugin list, restart the app. In the plugin picker, select **Agent Observer**, then ask it to start Observer and show your selected session. Supply the absolute `.jsonl` path if the host cannot resolve the exact session you chose.
+
+The CLI and desktop app must use the same Codex profile. If you deliberately set `CODEX_HOME`, create that directory first and use the same value for installation and the host that loads the plugin. Installing into a separate test profile does not install it into your usual desktop profile. Confirm `codex plugin list` shows `agent-observer@agent-observer-local` as **installed, enabled**.
+
+For example, ask: “Start Observer on an available port, connect `/absolute/path/to/my-session.jsonl`, and open its viewer.” An available port (`observer_start` with `port: 0`) keeps a separate verification viewer from reusing an already-running Observer on port 8767. No `init`, hooks, Docker, or exporter setup is required. Using Observer MCP tools needs no API key; asking a Codex model to operate them still requires your normal Codex sign-in.
 
 ## Workflow and lifetime
 
