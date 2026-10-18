@@ -71,7 +71,7 @@ func TestCodexIdentityPinnedBeforeFirstReadAndRecovers(t *testing.T) {
 }
 
 func TestCodexPublishedSnapshotSurvivesIdentityRejectionAndRecovery(t *testing.T) {
-	for _, mode := range []string{"replacement", "same-inode"} {
+	for _, mode := range []string{"replacement", "same-inode", "in-place-recovery"} {
 		t.Run(mode, func(t *testing.T) {
 			file := filepath.Join(t.TempDir(), "source.jsonl")
 			replaceIdentityFile(t, file, identityTranscript(t, "one", "original"))
@@ -105,7 +105,14 @@ func TestCodexPublishedSnapshotSurvivesIdentityRejectionAndRecovery(t *testing.T
 				}
 			}
 
-			replaceIdentityFile(t, file, identityTranscript(t, "one", "recovered"))
+			recovered := identityTranscript(t, "one", "recovered")
+			if mode == "in-place-recovery" {
+				if err := os.WriteFile(file, recovered, 0600); err != nil {
+					t.Fatal(err)
+				}
+			} else {
+				replaceIdentityFile(t, file, recovered)
+			}
 			state, _, root := reader.Read()
 			if state["error"] != nil || root != "one" ||
 				state.String("turn") != "recovered" {

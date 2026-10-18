@@ -51,6 +51,9 @@ func (c *Cursor) ReadChecked(
 	if c.ValidateHeader != nil {
 		ready, err := c.checkHeader(f)
 		if err != nil || !ready {
+			// A rejected header breaks continuity, even if a later valid file
+			// reuses this inode. Defer reset until its header validates.
+			c.identity = nil
 			return err
 		}
 	}
